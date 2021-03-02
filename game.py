@@ -16,11 +16,12 @@ col, row = position
 
 board.move(col,row)
 
-for position in board.find_position(col,row):
-    board.move(position[0],position[1],letter=" O")
-
-print(board)
-
+board.look_ahead(col,row)
+# for position in board.find_position(col,row):
+#     board.move(position[0],position[1],letter=" O")
+#
+# print(board)
+#
 
 
 

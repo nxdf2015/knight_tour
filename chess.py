@@ -7,11 +7,12 @@ class Board:
     def __init__(self, cols=8, rows=8):
         self.rows = rows
         self.cols = cols
-        self.board = [ [Board.empty] * self.cols for i in range(self.rows)]
+        self.board = [[Board.empty] * self.cols for i in range(self.rows)]
 
 
     def move(self,col,row,letter=" X"):
             self.board[row-1][col-1] = letter
+
     def valid_position(self, x,y):
         return   1 <= x <= self.cols and  1 <= y <=self.rows
 
@@ -27,6 +28,16 @@ class Board:
 
         return positions
 
+    def look_ahead(self,col,row):
+
+        positions = [ p for p in self.find_position(col,row) if not p == (col,row)]
+
+        self.move(col,row)
+        for position in positions:
+            n = len(self.find_position(position[0], position[1])) - 1
+            self.move(position[0], position[1],letter = " " + str(n))
+        print("Here are the possible moves:")
+        print(self)
 
     def __str__(self):
        size = len(self.board[0]) * 3 + 3
