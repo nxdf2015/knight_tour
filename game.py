@@ -13,9 +13,13 @@ position = get_input("Enter the knight's starting position: ","Invalid positions
 
 
 col, row = position
-board.move(col,row)
-print(board)
 
+board.move(col,row)
+
+for position in board.find_position(col,row):
+    board.move(position[0],position[1],letter=" O")
+
+print(board)
 
 
 

@@ -1,16 +1,36 @@
 
 
+
 class Board:
     empty = "__"
-    player = " X"
+
     def __init__(self, cols=8, rows=8):
         self.rows = rows
         self.cols = cols
         self.board = [ [Board.empty] * self.cols for i in range(self.rows)]
 
 
-    def move(self,col,row):
-            self.board[row-1][col-1] = Board.player
+    def move(self,col,row,letter= " X"):
+            self.board[row-1][col-1] = letter
+    def valid_position(self, x,y):
+        return   1 <= x <= self.cols and  1 <= y <=self.rows
+
+    def find_position(self,col,row):
+        positions = []
+
+        for x in (2, -2):
+            for y in (1, -1):
+
+                if self.valid_position(col + x, row + y):
+                    positions.append((col + x, row +y))
+
+
+                if self.valid_position(col + y, row + x):
+                    positions.append((col + y, row + x))
+
+        return positions
+
+
 
 
 
