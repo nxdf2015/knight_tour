@@ -1,17 +1,20 @@
 
-from utilities import validation,get_input
+from utilities import get_input
 from chess import Board
 
 
 
-board = Board()
+
+n_cols,n_rows = get_input("Enter your board dimensions: ", "Invalid dimensions")
+
+board = Board(n_cols,n_rows)
+
+position = get_input("Enter the knight's starting position: ","Invalid positions", cols=n_cols, rows=n_rows)
 
 
-response = get_input("Enter the knight's starting position")
-if response:
-    row, col = response
-    board.move(row,col)
-    print(board)
+col, row = position
+board.move(col,row)
+print(board)
 
 
 

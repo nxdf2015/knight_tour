@@ -1,28 +1,18 @@
 
 
-def validation(exception, message):
-    def validate(f):
-        def wrapper(*args):
-            try:
-                return f(*args)
-            except ValueError as e:
-                print(message)
-                return False
-        return wrapper
-    return validate
 
-@validation(ValueError, "Invalid position!")
-def get_input(message):
-        print(message)
-        values =  tuple(  map(int,input().split(" ")))
-        if len(values) == 2:
-            return values
-        else:
-            raise ValueError()
+def get_input(message ,errors_message,**size):
+    while True:
+        try:
 
+            col,row = map(int,list(input(message).split(" ")))
+            if (len(size) == 0 and col > 0 and row >0):
+                return (col,row)
+            elif (len(size) == 2 and 0< row <= size["rows"] and 0 <col <= size["cols"]):
+                return (col,row)
+            else:
+                raise ValueError()
 
+        except ValueError as e:
+            print(errors_message)
 
-def in_range(limit=8):
-    def valid(x):
-        return 1 <= x <= 8
-    return valid
