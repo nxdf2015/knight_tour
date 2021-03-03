@@ -1,6 +1,7 @@
 
 
 
+
 class Board:
     empty = "__"
 
@@ -8,10 +9,11 @@ class Board:
         self.rows = rows
         self.cols = cols
         self.board = [[Board.empty] * self.cols for i in range(self.rows)]
+        self.route = []
 
 
-    def move(self,col,row,letter=" X"):
-            self.board[row-1][col-1] = letter
+    def move(self,col,row,letter="X"):
+            self.board[row-1][col-1] = letter.rjust(2," ")
 
     def valid_position(self, x,y):
         return   1 <= x <= self.cols and  1 <= y <=self.rows
@@ -31,13 +33,14 @@ class Board:
     def look_ahead(self,col,row):
 
         positions = [ p for p in self.find_position(col,row) if not p == (col,row)]
+        return [ (x, y, len(self.find_position(x, y)) - 1) for x,y in positions]
 
-        self.move(col,row)
-        for position in positions:
-            n = len(self.find_position(position[0], position[1])) - 1
-            self.move(position[0], position[1],letter = " " + str(n))
-        print("Here are the possible moves:")
-        print(self)
+
+    def isEmpty(self,col, row):
+        return not self.board[row - 1][col - 1] == " *"
+
+    def is_explored(self,col,row):
+        return self.board[row -1 ][col - 1] in "X*"
 
     def __str__(self):
        size = len(self.board[0]) * 3 + 3
