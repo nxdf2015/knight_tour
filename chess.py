@@ -33,7 +33,7 @@ class Board:
     def look_ahead(self,col,row):
 
         positions = [ p for p in self.find_position(col,row) if not p == (col,row)]
-        return [ (x, y, len(self.find_position(x, y)) - 1) for x,y in positions]
+        return [ (x, y, len(self.find_position(x, y)) - 1) for x,y in positions if not (x,y) == (col,row)]
 
 
     def isEmpty(self,col, row):
@@ -50,4 +50,6 @@ class Board:
            heading+"\n"+\
          " " * 3 +  " ".join(list(map(lambda v : " " + str(v) ,range(1,self.cols + 1))))
        return board
+
+
 
