@@ -8,13 +8,10 @@ def play(col, row, n_cols, n_rows):
     board = Board(n_cols, n_rows)
     while True:
 
-
         length_tour += 1
         chess.set_visited(col,row)
 
         positions = chess.look_ahead(col,row)
-        # positions = [(* p,c) for * p,  c in positions  if chess.is_empty(* p )]
-        print(positions)
         if len(positions) == 0:
             if length_tour ==  n_cols * n_rows:
                 print("What a great tour! Congratulations!")
