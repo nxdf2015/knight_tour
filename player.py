@@ -32,5 +32,3 @@ def play(col, row, n_cols, n_rows):
 
 
 
-if __name__ == "__main__":
-    play(1,3,4,4)
